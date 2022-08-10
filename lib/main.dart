@@ -1,7 +1,20 @@
-import 'package:api_demo/home_page.dart';
+import 'package:api_demo/error_page.dart';
+import 'package:api_demo/getx_tut/snackDialogBottomSheet.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Custom Error Page'),
+      ),
+      backgroundColor: Colors.blue,
+      body: CustomErrorPage(
+        errorMessage: details.exceptionAsString(),
+      ),
+    );
+  };
   runApp(const MyApp());
 }
 
@@ -10,12 +23,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Getx Tutorial',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.amber,
       ),
-      home: const HomePage(),
+      home: const HomeTut(),
+      getPages: [
+        // GetPage(name: name, page: () => page),
+        GetPage(name: "/test", page: () => const HomeTut(),),
+      ],
     );
   }
 }

@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:api_demo/posts.dart';
-import 'package:api_demo/remote_services.dart';
+import 'package:api_demo/rest/posts.dart';
+import 'package:api_demo/rest/remote_services.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,6 +40,9 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Visibility(
         visible: isLoaded,
+        replacement: const Center(
+          child: CircularProgressIndicator(),
+        ),
         child: ListView.builder(
           itemCount: posts?.length,
           itemBuilder: (context, index) {
@@ -81,9 +84,6 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           },
-        ),
-        replacement: const Center(
-          child: CircularProgressIndicator(),
         ),
       ),
     );
